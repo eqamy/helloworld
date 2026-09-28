@@ -1,0 +1,11 @@
+{
+  "name": "hello-world-site",
+  "version": "1.0.0",
+  "description": "我的第一个 AI 开发的 Node.js 网站",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "【你的名字】",
+  "license": "MIT"
+}

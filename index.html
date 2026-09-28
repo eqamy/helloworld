@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World 网站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 48px 56px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+      max-width: 640px;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .time-box {
+      margin-top: 24px;
+      padding: 14px 24px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      display: inline-block;
+    }
+    .time-box .label {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 4px;
+    }
+    .time-box .value {
+      font-size: 26px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 1px;
+    }
+    .footer {
+      margin-top: 28px;
+      font-size: 13px;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- 占位符会被 server.js 替换为真实内容 -->
+    <h1>Hello World！我是{{MY_NAME}}，我的第一个AI开发的网站</h1>
+
+    <div class="time-box">
+      <div class="label">🕐 当前服务器时间</div>
+      <div class="value" id="serverTime">{{SERVER_TIME}}</div>
+    </div>
+
+    <div class="footer">由 Node.js 提供支持 · 时间每 5 秒自动刷新</div>
+  </div>
+
+  <script>
+    // 每 5 秒请求一次 /api/time 接口，刷新页面上显示的服务器时间
+    async function refreshTime() {
+      try {
+        const res = await fetch('/api/time');
+        const data = await res.json();
+        document.getElementById('serverTime').textContent = data.serverTime;
+      } catch (e) {
+        // 接口暂时不可用时保留原显示，不报错
+      }
+    }
+    setInterval(refreshTime, 5000);
+  </script>
+</body>
+</html>
